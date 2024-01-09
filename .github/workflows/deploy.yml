@@ -72,7 +72,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Push to Docker
-        uses: docker/buid-push-action@v3
+        uses: docker/build-push-action@v3
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_TAG }}
