@@ -1,5 +1,6 @@
 package de.neuefische.backend.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.neuefische.backend.dto.InstructorDto;
 import de.neuefische.backend.model.Instructor;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,17 +40,18 @@ class InstructorControllerTest {
     @Test
     void getAllInstructors_shouldReturnListOfInstructs() throws Exception{
         //GIVEN
-        List<Instructor> instructorsToAdd=List.of(new Instructor("1", "John", "Doe", "john.doe@example.com", "123456", new Qualification()));
+        InstructorDto instructorsToAdd=new InstructorDto("John", "Doe", "john.doe@example.com", "123456", new Qualification());
         String instructorToAddAsJson=objectMapper.writeValueAsString(instructorsToAdd);
         MvcResult result=mockMvc.perform(MockMvcRequestBuilders.post(API_URL)
                                    .contentType(MediaType.APPLICATION_JSON)
                 .content(instructorToAddAsJson))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andReturn();
-        Instructor savedInstructor=objectMapper.readValue(result.getResponse().getContentAsString(),Instructor.class);
+        String body=result.getResponse().getContentAsString();
+        Instructor savedInstructor= objectMapper.readValue(body, Instructor.class);
         String instructorAsJson=objectMapper.writeValueAsString(savedInstructor);
         //WHEN + THEN
-        mockMvc.perform(MockMvcRequestBuilders.get(API_URL))
+        mockMvc.perform(MockMvcRequestBuilders.get(API_URL + "/" + savedInstructor.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(instructorAsJson));
     }
