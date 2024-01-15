@@ -1,10 +1,9 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.dto.InstructorDto;
-import de.neuefische.backend.dto.QualificationDto;
+import de.neuefische.backend.exceptions.InstructorNotFoundException;
 import de.neuefische.backend.model.Instructor;
-import de.neuefische.backend.model.Qualification;
-import de.neuefische.backend.repository.InstructorRepository;
+import de.neuefische.backend.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,30 +14,28 @@ import java.util.List;
 @RequestMapping("/api/instructors")
 @RequiredArgsConstructor
 public class InstructorController {
-    private final InstructorRepository instructorRepository;
+    private final InstructorService instructorService;
     @GetMapping
     public List<Instructor> getAllInstructors(){
-        return instructorRepository.findAll();
+        return instructorService.findAllInstructors();
+    }
+    @GetMapping("/{id}")
+    public Instructor getInstructorById(@PathVariable String id) throws InstructorNotFoundException{
+        return instructorService.getInstructorById(id)
+                .orElseThrow( () -> new InstructorNotFoundException("Instructor with the id: " + id+ " not found"));
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Instructor createInstructor(@RequestBody InstructorDto instructorDto){
-        QualificationDto qualification=instructorDto.getQualification();
-        return instructorRepository.save(
-                Instructor.builder()
-                        .firstName(instructorDto.getFirstName())
-                        .lastName(instructorDto.getLastName())
-                        .email(instructorDto.getEmail())
-                        .phoneNumber(instructorDto.getPhoneNumber())
-                        .qualification(Qualification.builder()
-                                .isNordicSkiInstructor(qualification.isSkiInstructor())
-                                .isSnowboardInstructor(qualification.isSnowboardInstructor())
-                                .isNordicSkiInstructor(qualification.isNordicSkiInstructor())
-                                .isSegwayInstructor(qualification.isSegwayInstructor())
-                                .isHikingGuide(qualification.isHikingGuide())
-                                .build()
-                        )
-                .build()
-        );
+        return instructorService.saveInstructor(instructorDto);
+    }
+    @PutMapping("/{id}")
+    public Instructor updateInstructor(@PathVariable String id, @RequestBody InstructorDto instructorDto) throws InstructorNotFoundException{
+        return instructorService.updateInstructor(id,instructorDto);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteInstructor(@PathVariable String id){
+        instructorService.deleteInstructor(id);
     }
 }

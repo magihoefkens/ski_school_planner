@@ -1,5 +1,6 @@
 package de.neuefische.backend.dto;
 
+import de.neuefische.backend.model.Qualification;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +15,5 @@ public class InstructorDto {
     private String lastName;
     private String email;
     private String phoneNumber;
-    private QualificationDto qualification;
+    private Qualification qualification;
 }
