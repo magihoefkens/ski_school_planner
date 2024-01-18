@@ -28,7 +28,7 @@ public class InstructorService {
     }
 
     public Instructor saveInstructor(InstructorDto instructorDto) {
-        Qualification qualification=instructorDto.getQualification();
+
         return instructorRepository.save(
                 Instructor.builder()
                         .firstName(instructorDto.getFirstName())
@@ -36,12 +36,12 @@ public class InstructorService {
                         .email(instructorDto.getEmail())
                         .phoneNumber(instructorDto.getPhoneNumber())
                         .qualification(Qualification.builder()
-                                .isNordicSkiInstructor(qualification.isSkiInstructor())
-                                .isSnowboardInstructor(qualification.isSnowboardInstructor())
-                                .isNordicSkiInstructor(qualification.isNordicSkiInstructor())
-                                .isSegwayInstructor(qualification.isSegwayInstructor())
-                                .isHikingGuide(qualification.isHikingGuide())
-                                .build()
+                                .isSkiInstructor(instructorDto.getQualification().getIsSkiInstructor())
+                                .isNordicSkiInstructor(instructorDto.getQualification().getIsNordicSkiInstructor())
+                                .isSnowboardInstructor(instructorDto.getQualification().getIsSnowboardInstructor())
+                                .isSegwayInstructor(instructorDto.getQualification().getIsSegwayInstructor())
+                                .isHikingGuide(instructorDto.getQualification().getIsHikingGuide())
+                            .build()
                         )
                         .build()
         );
