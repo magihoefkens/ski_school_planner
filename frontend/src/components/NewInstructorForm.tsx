@@ -54,12 +54,7 @@ export default function NewInstructorForm(props:AddInstructorProps){
             lastName: "",
             email: "",
             phoneNumber: "",
-            qualification: {
-                isSkiInstructor: false,
-                isSnowboardInstructor: false,
-                isNordicSkiInstructor: false,
-                isSegwayInstructor: false,
-                isHikingGuide: false,
+            qualification: { ...qualification
             }});
     }
 

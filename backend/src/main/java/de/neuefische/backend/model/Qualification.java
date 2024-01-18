@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class Qualification {
-    private boolean isSkiInstructor;
-    private boolean isSnowboardInstructor;
-    private boolean isNordicSkiInstructor;
-    private boolean isSegwayInstructor;
-    private boolean isHikingGuide;
+    private Boolean isSkiInstructor;
+    private Boolean isSnowboardInstructor;
+    private Boolean isNordicSkiInstructor;
+    private Boolean isSegwayInstructor;
+    private Boolean isHikingGuide;
 }
