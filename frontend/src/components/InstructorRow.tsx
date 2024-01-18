@@ -25,6 +25,20 @@ export default function InstructorRow(props: InstructorCardProps) {
     function handleChangeName(event: ChangeEvent<HTMLInputElement>) {
         setInstructor({...instructor, [event.target.name]: event.target.value})
     }
+    function handleCheckbox(event:ChangeEvent<HTMLInputElement>){
+        const {name,checked}=event.target;
+
+        setInstructor(
+            (prevInstructor) => ({
+                ...prevInstructor,
+                qualification: {
+                    ...prevInstructor.qualification,
+                    [name]:checked,
+                },
+            })
+        );
+        console.log(instructor)
+    }
     function handleUpdateInstructor() {
         Swal.fire({
             title: 'Änderungen speichern?',
@@ -111,41 +125,41 @@ export default function InstructorRow(props: InstructorCardProps) {
             <TableCell component={"td"} onClick={handleEditInstructor}>
                 <Grid container spacing={5}>
                     <Grid item>
+                        {editMode ?
+                            <Checkbox checked={instructor.qualification.isSkiInstructor} onChange={handleCheckbox} name="isSkiInstructor" /> :instructor.qualification.isSkiInstructor
+
+                        }
                         {instructor.qualification.isSkiInstructor ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
-                        {editMode ?
-                            <Checkbox checked={instructor.qualification.isSkiInstructor} onChange={handleChangeName} name="isSkiInstructor" /> :instructor.qualification.isSkiInstructor
-
-                        }
                     </Grid>
                     <Grid item>
+                        {editMode ?
+                            <Checkbox checked={instructor.qualification.isSnowboardInstructor} onChange={handleCheckbox} name="isSnowboardInstructor" /> :instructor.qualification.isSnowboardInstructor
+
+                        }
                         {instructor.qualification.isSnowboardInstructor ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
-                        {editMode ?
-                            <Checkbox checked={instructor.qualification.isSnowboardInstructor} onChange={handleChangeName} name="isSkiSnowboardInstructor" /> :instructor.qualification.isSnowboardInstructor
-
-                        }
                     </Grid>
                     <Grid item>
+
+                        {editMode ?
+                            <Checkbox checked={instructor.qualification.isNordicSkiInstructor} onChange={handleCheckbox} name="isNordicSkiInstructor" /> :instructor.qualification.isNordicSkiInstructor
+
+                        }
                         {instructor.qualification.isNordicSkiInstructor ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
-                        {editMode ?
-                            <Checkbox checked={instructor.qualification.isNordicSkiInstructor} onChange={handleChangeName} name="isNordicSkiInstructor" /> :instructor.qualification.isNordicSkiInstructor
-
-                        }
                     </Grid>
                     <Grid item>
-                        {
-                            instructor.qualification.isSegwayInstructor ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
                         {
                             editMode ?
-                            <Checkbox checked={instructor.qualification.isSegwayInstructor} onChange={handleChangeName} name="isSegwayInstructor" /> :instructor.qualification.isSegwayInstructor
+                            <Checkbox checked={instructor.qualification.isSegwayInstructor} onChange={handleCheckbox} name="isSegwayInstructor" /> :instructor.qualification.isSegwayInstructor
 
                         }
+                        {instructor.qualification.isSegwayInstructor ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
                     </Grid>
                     <Grid item>
-                        {instructor.qualification.isHikingGuide ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
                         {editMode ?
-                            <Checkbox checked={instructor.qualification.isHikingGuide} onChange={handleChangeName} name="isHikingGuide" /> :instructor.qualification.isHikingGuide
+                            <Checkbox checked={instructor.qualification.isHikingGuide} onChange={handleCheckbox} name="isHikingGuide" /> :instructor.qualification.isHikingGuide
 
                         }
+                        {instructor.qualification.isHikingGuide ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
                     </Grid>
 
                 </Grid>
