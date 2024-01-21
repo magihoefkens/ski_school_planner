@@ -19,5 +19,5 @@ public class CourseDto {
     private CourseLevel courseLevel;
     private String instructorId;
     private List<Participant> participants;
-    boolean isCompleted;
+    boolean completed;
 }
