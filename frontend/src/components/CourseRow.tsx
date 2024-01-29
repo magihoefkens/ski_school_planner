@@ -47,7 +47,6 @@ export default function CourseRow(props:CourseRowProps){
 
 
         navigate(`/courses/${props.course.id}`, {state: { courseToUpdate: courseToUpdate} });
-        //navigate(`/courses/${props.course.id}`);
 
         setEditMode(false);
     }
