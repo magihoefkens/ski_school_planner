@@ -9,5 +9,4 @@ export type Course={
     instructorId: string,
     participants: Participant[],
     completed: boolean,
-
 }

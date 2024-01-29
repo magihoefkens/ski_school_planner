@@ -29,6 +29,7 @@ export type CourseRowProps = {
 }
 export default function CourseRow(props:CourseRowProps){
     const [editMode,setEditMode]=useState<boolean>(false);
+    const[courseToUpdate,setCourseToUpdate]=useState<Course>(props.course);
     const [courseToEdit,setCourseToEdit]=useState<CourseDto>({
         courseType:props.course.courseType,
         courseLevel:props.course.courseLevel,
@@ -38,9 +39,16 @@ export default function CourseRow(props:CourseRowProps){
     });
     const [filteredInstructorsByCourseType,setFilteredInstructorsByCourseType]=useState<Instructor[]>(props.instructors);
     const navigate = useNavigate();
-    function handleRouteToParticipantDialog(){
-        navigate('/courses/{props.course.id}}', { state: props.course });
-        props.updateCourse(props.course.id, courseToEdit);
+    async function handleRouteToParticipantDialog(){
+        console.log(props.course.id)
+        setCourseToUpdate(props.course);
+        console.log('Setting course to update');
+        console.log(courseToUpdate);
+
+
+        navigate(`/courses/${props.course.id}`, {state: { courseToUpdate: courseToUpdate} });
+        //navigate(`/courses/${props.course.id}`);
+
         setEditMode(false);
     }
 

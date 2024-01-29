@@ -63,7 +63,7 @@ export default function useCourses(){
             title: 'Kurs wird aktualisiert...',
             didOpen: () => {
                 Swal.showLoading();
-
+                console.log(course);
                 axios.put(BASE_URL_COURSES + '/' + id, course, {
 
                     })
@@ -100,6 +100,44 @@ export default function useCourses(){
         }).then();
     }
 
+    /*
+    const addParticipant = (newParticipant: Participant, courseToUpdate: Course) => {
+        setLoadingCourses(true);
+        setParticipants((prevParticipants) => [...prevParticipants, newParticipant]);
+        updateCourse(courseToUpdate.id, courseToUpdate);
+        setLoadingCourses(false);
+    };
+
+    const deleteParticipant = (participant: Participant) => {
+        setLoadingParticipant(true);
+        setParticipants((prevParticipants) =>
+            prevParticipants.filter(
+                (p) =>
+                    p.firstName !== participant.firstName ||
+                    p.lastName !== participant.lastName ||
+                    p.phoneNumber !== participant.phoneNumber
+            )
+        );
+        setLoadingParticipant(false);
+    };
+
+    const updateParticipant = (
+        originalParticipant: Participant,
+        updatedParticipant: Participant
+    ) => {
+        setLoadingParticipant(true);
+        setParticipants((prevParticipants) =>
+            prevParticipants.map((p) =>
+                p.firstName === originalParticipant.firstName &&
+                p.lastName === originalParticipant.lastName &&
+                p.phoneNumber === originalParticipant.phoneNumber
+                    ? updatedParticipant
+                    : p
+            )
+        );
+        setLoadingParticipant(false);
+    };
+*/
     return {courses, loading: loadingCourses, addCourse, deleteCourse, updateCourse};
 }
 

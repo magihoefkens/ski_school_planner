@@ -10,14 +10,16 @@ type ParticipantTableProps={
     loadingParticipant:boolean;
 }
 export default function ParticipantTable(props:ParticipantTableProps) {
-
-
-    const participantRows = props.course?.participants.map((participant: Participant) =>
-        <ParticipantRow
+    const courseToEdit=props.course;
+    const courseParticipants=courseToEdit.participants;
+    const participantRows = courseParticipants.map((participant: Participant) =>
+        <ParticipantRow key={participant.lastName}
             updateParticipant={props.updateParticipant}
             handleDeleteParticipant={props.deleteParticipant}
             participant={participant}
             isLoading={props.loadingParticipant}
+                        course={props.course}
+                        participants={props.participants}
         />);
 
 

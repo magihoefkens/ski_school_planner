@@ -1,31 +1,64 @@
-import useParticipant from "../hooks/useParticipant.tsx";
-import {useEffect, useState} from "react";
-import {Course} from "../models/Course.ts";
+import {useState} from "react";
 import {Box, Button, Container} from "@mui/material";
 import NewParticipantDialog from "./NewParticipantDialog.tsx";
 import ParticipantTable from "./ParticipantTable.tsx";
-import {useParams} from "react-router-dom";
+import useCourses from "../hooks/useCourses.tsx";
+import {Participant} from "../models/Participant.ts";
 
-type ParticipantAppProps={
-    courses:Course[];
-}
+import {useLocation} from "react-router-dom";
 
-export default function ParticipantApp(props:ParticipantAppProps) {
-    const[courseToUpdate,setCourseToUpdate]=useState<Course |undefined>();
-    const { id: pathId } = useParams();
-    useEffect(() => {
-        const cours = props.courses.find(course=>(course.id===pathId))
-        if(cours) {
-            setCourseToUpdate(cours);
-
-        }else {
-            console.error("Kurs wurde nicht gefunden")
-        }
-
-    }, [pathId]);
+export default function ParticipantApp() {
+    const {loading,updateCourse }=useCourses();
+    const { state } = useLocation();
 
     const [open, setOpen] = useState<boolean>(false);
-    const {participants,addParticipant,updateParticipant,deleteParticipant,loading}=useParticipant(courseToUpdate)
+
+
+    const updateCourseFromState = () => {
+        updateCourse(state.courseToUpdate.id,
+            {
+                courseType:state.courseToUpdate.courseType,
+                courseLevel:state.courseToUpdate.courseLevel,
+                instructorId:state.courseToUpdate.instructorId,
+                participants:state.courseToUpdate.participants,
+                completed:state.courseToUpdate.completed
+            }
+        );
+    }
+
+    function addParticipant(newParticipant: Participant) {
+
+        state.courseToUpdate.participants.push(newParticipant);
+        console.log(state.courseToUpdate);
+        updateCourseFromState();
+
+    }
+
+    function deleteParticipant(participant: Participant) {
+
+        state.courseToUpdate.participants = state.courseToUpdate.participants.filter((p: Participant) =>
+            p.firstName !== participant.firstName ||
+            p.lastName !== participant.lastName ||
+            p.phoneNumber !== participant.phoneNumber
+        );
+        updateCourseFromState();
+    }
+
+    function updateParticipant(
+        originalParticipant: Participant,
+        updatedParticipant: Participant
+    ){
+
+        state.courseToUpdate.participants = state.courseToUpdate.participants.map((p: Participant) =>
+                p.firstName === originalParticipant.firstName &&
+                p.lastName === originalParticipant.lastName &&
+                p.phoneNumber === originalParticipant.phoneNumber
+                    ? updatedParticipant
+                    : p
+        );
+        updateCourseFromState();
+    }
+
     function handleOpen(){
         setOpen(true);
     }
@@ -45,8 +78,8 @@ export default function ParticipantApp(props:ParticipantAppProps) {
                     <button onClick={() => history.back()}>Back</button>
                 </Box>
                 {
-                    courseToUpdate ? (
-                <ParticipantTable course={courseToUpdate} participants={participants} updateParticipant={updateParticipant} deleteParticipant={deleteParticipant} loadingParticipant={loading}/>
+                    state.courseToUpdate ? (
+                <ParticipantTable course={state.courseToUpdate} participants={state.courseToUpdate.participants} updateParticipant={updateParticipant} deleteParticipant={deleteParticipant} loadingParticipant={loading}/>
                     ): (<p>Kurs nicht gefunden</p>)
                 }
                 <NewParticipantDialog open={open} onClose={handleClose} addParticipant={addParticipant}/>

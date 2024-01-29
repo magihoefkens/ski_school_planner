@@ -14,7 +14,7 @@ export default function NewParticipantForm(props:NewParticipantFormProps) {
         event.preventDefault();
         props.closeDialog();
         console.log(participant);
-        addParticipant(participant);
+        addParticipant(participant, );
     }
     function handleChangeName(event: ChangeEvent<HTMLInputElement>) {
         setParticipant({...participant,[event.target.name]:event.target.value});

@@ -5,8 +5,9 @@ import NewParticipantForm from "./NewParticipantForm.tsx";
 type NewParticipantDialogProps={
     open:boolean,
     onClose:()=>void,
-    addParticipant:(participant:Participant)=>void,
+    addParticipant:(participant:Participant)=>void
 }
+
 export default function NewParticipantDialog(props:NewParticipantDialogProps){
     return(
         <Dialog
