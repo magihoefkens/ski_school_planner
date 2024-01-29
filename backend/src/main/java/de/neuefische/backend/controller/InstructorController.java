@@ -19,6 +19,7 @@ public class InstructorController {
     public List<Instructor> getAllInstructors(){
         return instructorService.findAllInstructors();
     }
+
     @GetMapping("/{id}")
     public Instructor getInstructorById(@PathVariable String id) throws InstructorNotFoundException{
         return instructorService.getInstructorById(id)
