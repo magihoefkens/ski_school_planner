@@ -5,15 +5,13 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Swal from "sweetalert2";
-import {Course} from "../models/Course.ts";
+
 
 type ParticipantRowProps={
     participant:Participant;
     handleDeleteParticipant:(participant:Participant) =>void;
     updateParticipant:(participant:Participant,participantToEdit:Participant) => void;
     isLoading:boolean;
-    course:Course;
-    participants:Participant[];
 }
 export default function ParticipantRow(props:ParticipantRowProps){
     const[editMode,setEditMode]=useState<boolean>(false);
