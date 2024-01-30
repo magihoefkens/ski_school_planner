@@ -20,6 +20,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import {useNavigate} from "react-router-dom";
+import {getInstructorsByQualification} from "../util/courseUtils.ts";
 
 export type CourseRowProps = {
     course: Course;
@@ -52,24 +53,6 @@ export default function CourseRow(props:Readonly<CourseRowProps>){
         setEditMode(false);
     }
 
-    function getInstructorsByQualification(courseType: CourseType, instructors: Instructor[]): Instructor[] {
-        return instructors.filter(instructor => {
-            switch (courseType) {
-                case CourseType.SKI:
-                    return instructor.qualification.isSkiInstructor;
-                case CourseType.SNOWBOARD:
-                    return instructor.qualification.isSnowboardInstructor;
-                case CourseType.NORDIC_SKI:
-                    return instructor.qualification.isNordicSkiInstructor;
-                case CourseType.SEGWAY:
-                    return instructor.qualification.isSegwayInstructor;
-                case CourseType.HIKE:
-                    return instructor.qualification.isHikingGuide;
-                default:
-                    return false;
-            }
-        })
-    }
     function getInstructorName(instructorId:string) {
         const selectedInstructor = filteredInstructorsByCourseType.find(instructor => instructor.id === instructorId);
         return selectedInstructor ? `${selectedInstructor.firstName} ${selectedInstructor.lastName}` : '';

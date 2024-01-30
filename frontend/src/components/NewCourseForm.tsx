@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import {CourseType} from "../models/CourseType.ts";
 import {CourseLevel} from "../models/CourseLevel.ts";
+import {getInstructorsByQualification} from "../util/courseUtils.ts";
 
 
 
@@ -34,24 +35,7 @@ export default function NewCourseForm(props:Readonly<NewCourseFormProps>){
         props.addCourse(courseDto);
         props.closeDialog();
     }
-    function getInstructorsByQualification(courseType: CourseType, instructors: Instructor[]): Instructor[] {
-        return instructors.filter(instructor => {
-            switch (courseType) {
-                case CourseType.SKI:
-                    return instructor.qualification.isSkiInstructor;
-                case CourseType.SNOWBOARD:
-                    return instructor.qualification.isSnowboardInstructor;
-                case CourseType.NORDIC_SKI:
-                    return instructor.qualification.isNordicSkiInstructor;
-                case CourseType.SEGWAY:
-                    return instructor.qualification.isSegwayInstructor;
-                case CourseType.HIKE:
-                    return instructor.qualification.isHikingGuide;
-                default:
-                    return false;
-            }
-        })
-    }
+
     function handleChangeCourseType(event:SelectChangeEvent){
         const value = event.target.value;
         setCourseDto({...courseDto, courseType: value as CourseType});
