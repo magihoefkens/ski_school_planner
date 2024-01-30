@@ -13,7 +13,7 @@ type CourseTableProps={
 }
 
 
-export default function CourseTable(props:CourseTableProps){
+export default function CourseTable(props:Readonly<CourseTableProps>){
     const courseRows = props.courses.map(course =>
         <CourseRow
             instructors={props.instructors}

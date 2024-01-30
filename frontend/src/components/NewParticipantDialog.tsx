@@ -8,7 +8,7 @@ type NewParticipantDialogProps={
     addParticipant:(participant:Participant)=>void
 }
 
-export default function NewParticipantDialog(props:NewParticipantDialogProps){
+export default function NewParticipantDialog(props:Readonly<NewParticipantDialogProps>){
     return(
         <Dialog
             open={props.open}

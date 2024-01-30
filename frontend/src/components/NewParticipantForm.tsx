@@ -5,7 +5,7 @@ type NewParticipantFormProps={
     addParticipant:(participant:Participant) =>void;
     closeDialog:()=>void;
 }
-export default function NewParticipantForm(props:NewParticipantFormProps) {
+export default function NewParticipantForm(props:Readonly<NewParticipantFormProps>) {
     const addParticipant = props.addParticipant;
     const [participant, setParticipant] = useState<Participant>({
         firstName: "", lastName: "", phoneNumber: ""

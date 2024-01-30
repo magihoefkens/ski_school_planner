@@ -9,7 +9,7 @@ type ParticipantTableProps={
     deleteParticipant:(participant:Participant)=>void;
     loadingParticipant:boolean;
 }
-export default function ParticipantTable(props:ParticipantTableProps) {
+export default function ParticipantTable(props:Readonly<ParticipantTableProps>) {
     const courseToEdit=props.course;
     const courseParticipants=courseToEdit.participants;
     const participantRows = courseParticipants.map((participant: Participant) =>
@@ -18,8 +18,6 @@ export default function ParticipantTable(props:ParticipantTableProps) {
             handleDeleteParticipant={props.deleteParticipant}
             participant={participant}
             isLoading={props.loadingParticipant}
-                        course={props.course}
-                        participants={props.participants}
         />);
 
 

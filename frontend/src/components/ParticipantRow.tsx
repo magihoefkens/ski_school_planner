@@ -13,7 +13,7 @@ type ParticipantRowProps={
     updateParticipant:(participant:Participant,participantToEdit:Participant) => void;
     isLoading:boolean;
 }
-export default function ParticipantRow(props:ParticipantRowProps){
+export default function ParticipantRow(props:Readonly<ParticipantRowProps>){
     const[editMode,setEditMode]=useState<boolean>(false);
     const[participantToEdit,setParticipantToEdit]=useState<Participant>({
         firstName:props.participant.firstName,

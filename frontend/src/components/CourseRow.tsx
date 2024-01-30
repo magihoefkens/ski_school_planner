@@ -13,6 +13,7 @@ import {
     TableCell,
     TableRow,
 } from "@mui/material";
+import { GiTrafficLightsGreen,GiTrafficLightsRed } from "react-icons/gi";
 import {CourseType} from "../models/CourseType.ts";
 import {CourseLevel} from "../models/CourseLevel.ts";
 import CheckIcon from "@mui/icons-material/Check";
@@ -27,7 +28,7 @@ export type CourseRowProps = {
     updateCourse: (id: string, course: CourseDto) => void;
     instructors: Instructor[];
 }
-export default function CourseRow(props:CourseRowProps){
+export default function CourseRow(props:Readonly<CourseRowProps>){
     const [editMode,setEditMode]=useState<boolean>(false);
     const[courseToUpdate,setCourseToUpdate]=useState<Course>(props.course);
     const [courseToEdit,setCourseToEdit]=useState<CourseDto>({
@@ -182,7 +183,7 @@ export default function CourseRow(props:CourseRowProps){
             </TableCell>
             <TableCell component={"td"}
                        onClick={() => setEditMode(true)}>
-                {props.course.completed ?  <CheckIcon color={"success"}/>: <CloseIcon color={"error"}/>}
+                {props.course.completed ? <GiTrafficLightsRed /> : <GiTrafficLightsGreen />}
             </TableCell>
             <TableCell component={"td"}>
                 {

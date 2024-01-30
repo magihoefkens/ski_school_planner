@@ -19,7 +19,7 @@ type NewCourseFormProps={
     closeDialog:() =>void;
     instructors:Instructor[];
 }
-export default function NewCourseForm(props:NewCourseFormProps){
+export default function NewCourseForm(props:Readonly<NewCourseFormProps>){
     const [courseDto, setCourseDto] = useState<CourseDto>({
         courseType: CourseType.SKI,
         courseLevel: CourseLevel.BEGINNER,

@@ -9,7 +9,7 @@ type NewCourseDialogProps={
     addCourse:(course:CourseDto)=>void,
     instructors:Instructor[],
 }
-export default function NewCourseDialog(props:NewCourseDialogProps){
+export default function NewCourseDialog(props:Readonly<NewCourseDialogProps>){
     return (
         <Dialog
             open={props.open}
