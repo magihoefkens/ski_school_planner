@@ -5,6 +5,7 @@ import SearchBar from "../util/SearchBar.tsx";
 import InstructorTable from "./InstructorTable.tsx";
 import useInstructors from "../hooks/useInstructors.tsx";
 import NewInstructorDialog from "./NewInstructorDialog.tsx";
+import TopBar from "../navigation/TopBar.tsx";
 
 
 export default function InstructorApp(){
@@ -12,7 +13,6 @@ export default function InstructorApp(){
     const[open,setOpen]=useState<boolean>(false);
     const[searchTerm,setSearchTerm] = useState<string>("");
     const filteredInstructors = instructors.filter(instructor => {
-        console.log(instructors);
         return instructor.firstName.toLowerCase().includes(searchTerm.toLowerCase()) || instructor.lastName.toLowerCase().includes(searchTerm.toLowerCase());
     }).reverse();
     function handleOpen(){
@@ -27,6 +27,7 @@ export default function InstructorApp(){
     return(
 
             <Box sx={{mt: 2}}>
+                <TopBar/>
                 <Container>
                     <Box sx={{
                         display: "flex",

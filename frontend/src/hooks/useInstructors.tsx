@@ -6,6 +6,7 @@ import ErrorHandling from "../components/errorHandling/ErrorHandling.tsx";
 import {InstructorDto} from "../models/InstructorDto.ts";
 import {toast} from "react-toastify";
 
+
 export default function useInstructors(){
     const [instructors,setInstructors]=useState<Instructor[]>([])
     const[loading,setLoading]=useState<boolean>(false);
@@ -31,7 +32,8 @@ export default function useInstructors(){
         fetchInstructors();
     }, [fetchInstructors]);
 
-    function addInstructor(instructor:InstructorDto) {
+
+        function addInstructor(instructor:InstructorDto) {
         setLoading(true);
         Swal.fire({
             title: 'Skilehrer wird hinzugefügt...',
