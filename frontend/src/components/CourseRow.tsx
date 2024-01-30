@@ -186,8 +186,8 @@ export default function CourseRow(props:CourseRowProps){
             </TableCell>
             <TableCell component={"td"}>
                 {
-                courseToEdit.participants.map((participant, index) => (
-                <div key={index}>
+                courseToEdit.participants.map((participant) => (
+                <div key={participant.lastName}>
                     {`${participant.firstName} ${participant.lastName} - ${participant.phoneNumber}`}
                 </div>
                 ))
