@@ -74,8 +74,13 @@ export default function ParticipantApp() {
                     alignItems: "center",
                     flexDirection: "row",
                 }}>
-                    <Button sx={{mb: 2}} onClick={handleOpen} variant={"outlined"}>Neuer Teilnehmer</Button>
                     <button onClick={() => history.back()}>Back</button>
+                    {!state.courseToUpdate.completed && (
+                        <Button sx={{ mb: 2 }} onClick={handleOpen} variant={"outlined"}>
+                            Neuer Teilnehmer
+                        </Button>
+                    )}
+
                 </Box>
                 {
                     state.courseToUpdate ? (

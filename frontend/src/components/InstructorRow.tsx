@@ -123,22 +123,22 @@ export default function InstructorRow(props: InstructorCardProps) {
                 }
             </TableCell>
             <TableCell component={"td"} onClick={handleEditInstructor}>
-                <Grid container spacing={5}>
-                    <Grid item>
+                <Grid container spacing={5} >
+                    <Grid item xs={2}>
                         {editMode ?
                             <Checkbox checked={instructor.qualification.isSkiInstructor} onChange={handleCheckbox} name="isSkiInstructor" /> :instructor.qualification.isSkiInstructor
 
                         }
                         {instructor.qualification.isSkiInstructor ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={2}>
                         {editMode ?
                             <Checkbox checked={instructor.qualification.isSnowboardInstructor} onChange={handleCheckbox} name="isSnowboardInstructor" /> :instructor.qualification.isSnowboardInstructor
 
                         }
                         {instructor.qualification.isSnowboardInstructor ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={2}>
 
                         {editMode ?
                             <Checkbox checked={instructor.qualification.isNordicSkiInstructor} onChange={handleCheckbox} name="isNordicSkiInstructor" /> :instructor.qualification.isNordicSkiInstructor
@@ -146,7 +146,7 @@ export default function InstructorRow(props: InstructorCardProps) {
                         }
                         {instructor.qualification.isNordicSkiInstructor ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={2}>
                         {
                             editMode ?
                             <Checkbox checked={instructor.qualification.isSegwayInstructor} onChange={handleCheckbox} name="isSegwayInstructor" /> :instructor.qualification.isSegwayInstructor
@@ -154,7 +154,7 @@ export default function InstructorRow(props: InstructorCardProps) {
                         }
                         {instructor.qualification.isSegwayInstructor ? <CheckIcon color = {"success"}/> : <CloseIcon color = {"error"}/>}
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={2}>
                         {editMode ?
                             <Checkbox checked={instructor.qualification.isHikingGuide} onChange={handleCheckbox} name="isHikingGuide" /> :instructor.qualification.isHikingGuide
 

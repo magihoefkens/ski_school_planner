@@ -1,19 +1,19 @@
 import {Course} from "../models/Course.ts";
 import {CourseDto} from "../models/CourseDto.ts";
 import {Instructor} from "../models/Instructor.ts";
-import {useState} from "react";
+import {ChangeEvent, Fragment, useState} from "react";
 import Swal from "sweetalert2";
 import {
     Button,
-    CircularProgress,
-    IconButton,
+    CircularProgress, Divider,
+    IconButton, List, ListItem, ListItemText,
     MenuItem,
     Select,
-    SelectChangeEvent,
+    SelectChangeEvent, Switch,
     TableCell,
     TableRow,
 } from "@mui/material";
-import { GiTrafficLightsGreen,GiTrafficLightsRed } from "react-icons/gi";
+
 import {CourseType} from "../models/CourseType.ts";
 import {CourseLevel} from "../models/CourseLevel.ts";
 import CheckIcon from "@mui/icons-material/Check";
@@ -29,9 +29,20 @@ export type CourseRowProps = {
     updateCourse: (id: string, course: CourseDto) => void;
     instructors: Instructor[];
 }
+const style = {
+    p: 0,
+    width: '100%',
+    maxWidth: 360,
+    borderRadius: 2,
+    border: '1px solid',
+    borderColor: 'divider',
+    backgroundColor: 'background.paper',
+};
+
 export default function CourseRow(props:Readonly<CourseRowProps>){
     const [editMode,setEditMode]=useState<boolean>(false);
     const[courseToUpdate,setCourseToUpdate]=useState<Course>(props.course);
+    const[checked,setChecked]=useState<boolean>(props.course.completed);
     const [courseToEdit,setCourseToEdit]=useState<CourseDto>({
         courseType:props.course.courseType,
         courseLevel:props.course.courseLevel,
@@ -86,6 +97,11 @@ export default function CourseRow(props:Readonly<CourseRowProps>){
     function handleChangeInstructor(event:SelectChangeEvent){
         const value=event.target.value;
         setCourseToEdit({...courseToEdit,instructorId:value})
+    }
+    function handleChangeCompleted(event:ChangeEvent<HTMLInputElement>){
+        const value=event.target.checked;
+        setChecked(value);
+        setCourseToEdit({...courseToEdit,completed:value});
     }
 
 
@@ -166,18 +182,27 @@ export default function CourseRow(props:Readonly<CourseRowProps>){
             </TableCell>
             <TableCell component={"td"}
                        onClick={() => setEditMode(true)}>
-                {props.course.completed ? <GiTrafficLightsRed /> : <GiTrafficLightsGreen />}
+                <Switch
+                    checked={checked}
+                    onChange={handleChangeCompleted}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                />
             </TableCell>
             <TableCell component={"td"}>
-                {
-                courseToEdit.participants.map((participant) => (
-                <div key={participant.lastName}>
-                    {`${participant.firstName} ${participant.lastName} - ${participant.phoneNumber}`}
-                </div>
-                ))
-                    }
-
+                <List sx={style} aria-label="teilnenmer folders">
+                {courseToEdit.participants.map((participant, index) => (
+                    <Fragment key={participant.lastName}>
+                        <ListItem>
+                            <ListItemText primary={`${participant.firstName} ${participant.lastName} - ${participant.phoneNumber}`} />
+                        </ListItem>
+                        {index < courseToEdit.participants.length - 1 && <Divider />}
+                    </Fragment>
+                ))}
+                </List>
                 <Button variant={"outlined"} onClick={handleRouteToParticipantDialog} sx={{mb: 2}}>Teilnehmer verwalten</Button>
+
+
+
             </TableCell>
 
 
