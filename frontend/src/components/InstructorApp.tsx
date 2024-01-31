@@ -25,9 +25,10 @@ export default function InstructorApp(){
     }
 
     return(
-
+            <>
+            <TopBar/>
             <Box sx={{mt: 2}}>
-                <TopBar/>
+
                 <Container>
                     <Box sx={{
                         display: "flex",
@@ -43,5 +44,6 @@ export default function InstructorApp(){
                     <NewInstructorDialog open={open} onClose={handleClose} addInstructor={addInstructor}/>
                 </Container>
             </Box>
+            </>
     )
 }
