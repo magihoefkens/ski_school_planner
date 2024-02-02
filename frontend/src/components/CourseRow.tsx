@@ -72,7 +72,7 @@ export default function CourseRow(props:Readonly<CourseRowProps>){
     function handleDeleteCourseButtonClick() {
         Swal.fire({
             title: 'Bist du sicher?',
-            text: "Du kannst diesen Kurs nicht wiederherstellen!",
+            text: "Der Kurs wird gelöscht!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Löschen',
@@ -108,7 +108,7 @@ export default function CourseRow(props:Readonly<CourseRowProps>){
     function handleEditCourseButtonClick() {
         Swal.fire({
             title: 'Bist du sicher?',
-            text: "Du kannst die Änderungen nicht rückgängig machen!",
+            text: "Deine Änderungen werden gespeichert!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Speichern',
@@ -191,7 +191,7 @@ export default function CourseRow(props:Readonly<CourseRowProps>){
             <TableCell component={"td"}>
                 <List sx={style} aria-label="teilnenmer folders">
                 {courseToEdit.participants.map((participant, index) => (
-                    <Fragment key={participant.lastName}>
+                    <Fragment key={participant.lastName+participant.firstName+participant.phoneNumber}>
                         <ListItem>
                             <ListItemText primary={`${participant.firstName} ${participant.lastName} - ${participant.phoneNumber}`} />
                         </ListItem>
@@ -199,6 +199,7 @@ export default function CourseRow(props:Readonly<CourseRowProps>){
                     </Fragment>
                 ))}
                 </List>
+                <br/>
                 <Button variant={"outlined"} onClick={handleRouteToParticipantDialog} sx={{mb: 2}}>Teilnehmer verwalten</Button>
 
 

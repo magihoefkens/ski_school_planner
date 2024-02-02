@@ -24,7 +24,7 @@ export default function ParticipantRow(props:Readonly<ParticipantRowProps>){
     function handleEditParticipantButtonClick(){
         Swal.fire({
             title: 'Bist du sicher?',
-            text: "Du kannst die Änderungen nicht rückgängig machen!",
+            text: "Die Änderungen werden gespeichert!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ja, speichern!',
@@ -43,7 +43,7 @@ export default function ParticipantRow(props:Readonly<ParticipantRowProps>){
     function handleDeleteParticipantButtonClick() {
         Swal.fire({
             title: 'Bist du sicher?',
-            text: "Du kannst diesen Kurs nicht wiederherstellen!",
+            text: "Der Kurs wird gelöscht !",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ja, löschen!',

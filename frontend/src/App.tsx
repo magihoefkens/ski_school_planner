@@ -29,7 +29,7 @@ function App() {
                 margin: 0,
             }}>
             <Routes>
-                <Route path={"/"} element={<Box><TopBar/><Div>Willkommen in unsere Skischule!</Div></Box>}/>
+                <Route path={"/"} element={<Box><TopBar/><Div>Willkommen in unserer Skischule!</Div></Box>}/>
                 <Route path={"/instructors"} element={<InstructorApp />}/>
                 <Route path={"/courses"} element={<CourseApp />}/>
                 <Route path="/courses/:id" element={
