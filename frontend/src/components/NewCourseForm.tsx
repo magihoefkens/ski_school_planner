@@ -15,6 +15,7 @@ import {getInstructorsByQualification} from "../util/courseUtils.ts";
 
 
 
+
 type NewCourseFormProps={
     addCourse:(course:CourseDto) => void;
     closeDialog:() =>void;
@@ -36,10 +37,10 @@ export default function NewCourseForm(props:Readonly<NewCourseFormProps>){
         props.closeDialog();
     }
 
-    function handleChangeCourseType(event:SelectChangeEvent){
+    async function handleChangeCourseType(event:SelectChangeEvent){
         const value = event.target.value;
         setCourseDto({...courseDto, courseType: value as CourseType});
-        const filteredInst=getInstructorsByQualification(courseDto.courseType,props.instructors);
+        const filteredInst= getInstructorsByQualification(value as CourseType,props.instructors);
         setFilteredInstructorsByCourseType(filteredInst);
     }
     function handleChangeInstructor(event:SelectChangeEvent){

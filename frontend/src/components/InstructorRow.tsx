@@ -42,7 +42,7 @@ export default function InstructorRow(props: InstructorCardProps) {
     function handleUpdateInstructor() {
         Swal.fire({
             title: 'Änderungen speichern?',
-            text: "Möchtest du die Änderungen wirklich speichern?",
+            text: "Möchtest du die Änderungen speichern?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -60,7 +60,7 @@ export default function InstructorRow(props: InstructorCardProps) {
     function handleDeleteInstructor() {
         Swal.fire({
             title: 'Möchtest du ' + instructor.firstName + ' ' + instructor.lastName + ' wirklich löschen?',
-            text: "Es kann nicht rückgängig gemacht werden!",
+            text: "Bist du sicher?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

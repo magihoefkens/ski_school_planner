@@ -13,7 +13,7 @@ export default function ParticipantTable(props:Readonly<ParticipantTableProps>) 
     const courseToEdit=props.course;
     const courseParticipants=courseToEdit.participants;
     const participantRows = courseParticipants.map((participant: Participant) =>
-        <ParticipantRow key={participant.lastName}
+        <ParticipantRow key={participant.firstName+participant.lastName+participant.phoneNumber}
             updateParticipant={props.updateParticipant}
             handleDeleteParticipant={props.deleteParticipant}
             participant={participant}
